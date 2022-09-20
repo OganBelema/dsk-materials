@@ -22,5 +22,5 @@ class LinkedListIterator<T : Any>(
         return lastNode!!.value
     }
 
-    override fun hasNext(): = index < list.size
+    override fun hasNext() = index < list.size
 }
