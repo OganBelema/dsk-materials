@@ -1,8 +1,13 @@
-class LinkedList<T : Any> {
+class LinkedList<T : Any>: Iterable<T> {
 
     private var head: Node<T>? = null
     private var tail: Node<T>? = null
-    private var size = 0
+    var size = 0
+        private set
+
+    override fun iterator(): Iterator<T> {
+        return LinkedListIterator(this)
+    }
 
     fun isEmpty(): Boolean = size == 0
 
