@@ -1,15 +1,31 @@
-class LinkedList<T : Any>: Iterable<T> {
+class LinkedList<T : Any>: Collection<T> {
 
     private var head: Node<T>? = null
     private var tail: Node<T>? = null
-    var size = 0
+    override var size = 0
         private set
 
     override fun iterator(): Iterator<T> {
         return LinkedListIterator(this)
     }
 
-    fun isEmpty(): Boolean = size == 0
+    override fun isEmpty(): Boolean = size == 0
+
+    override fun contains(element: T): Boolean {
+        for (item in this) {
+            if (item == element) return true
+        }
+
+        return false
+    }
+
+    override fun containsAll(elements: Collection<T>): Boolean {
+        for (item in elements) {
+            if (!contains(item)) return false
+        }
+
+        return true
+    }
 
     override fun toString(): String {
         if (isEmpty()) {
