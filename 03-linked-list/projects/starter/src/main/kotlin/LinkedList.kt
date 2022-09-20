@@ -1,11 +1,11 @@
-class LinkedList<T : Any>: Collection<T> {
+class LinkedList<T : Any>: MutableIterator<T>, Collection<T> {
 
     private var head: Node<T>? = null
     private var tail: Node<T>? = null
     override var size = 0
         private set
 
-    override fun iterator(): Iterator<T> {
+    override fun iterator(): MutableIterator<T> {
         return LinkedListIterator(this)
     }
 
@@ -26,6 +26,12 @@ class LinkedList<T : Any>: Collection<T> {
 
         return true
     }
+
+    override fun hasNext(): Boolean = iterator().hasNext()
+
+    override fun next(): T = iterator().next()
+
+    override fun remove() = iterator().remove()
 
     override fun toString(): String {
         if (isEmpty()) {

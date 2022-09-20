@@ -1,6 +1,6 @@
 class LinkedListIterator<T : Any>(
     private val list: LinkedList<T>
-) : Iterator<T> {
+) : MutableIterator<T> {
 
     private var index = 0
 
@@ -23,4 +23,18 @@ class LinkedListIterator<T : Any>(
     }
 
     override fun hasNext() = index < list.size
+
+    override fun remove() {
+        // 1
+        if (index == 1) {
+            list.pop()
+        } else {
+            // 2
+            val prevNode = list.nodeAt(index - 2) ?: return
+            // 3
+            list.removeAfter(prevNode)
+            lastNode = prevNode
+        }
+        index--
+    }
 }
